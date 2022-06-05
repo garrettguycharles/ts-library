@@ -1,4 +1,6 @@
 {
+  "name": "ts-library",
+  "version": "0.0.1",
   "dependencies": {
     "@types/argon2": "^0.15.0",
     "argon2": "^0.28.5",
