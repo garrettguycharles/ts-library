@@ -72,6 +72,10 @@ export class Sett<T> implements ISet<T> {
         return this.set.has(t);
     }
 
+    clear(): void {
+        this.set.clear();
+    }
+
     [Symbol.iterator](): Iterator<T> {
         return this.set[Symbol.iterator]();
     }
