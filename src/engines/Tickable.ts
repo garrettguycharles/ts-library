@@ -1,4 +1,3 @@
-import Logger from "jet-logger";
 import {sleep} from "../utils/functions";
 
 export abstract class Tickable {
@@ -17,7 +16,7 @@ export abstract class Tickable {
     protected abstract onTick(): Promise<void>;
 
     /**
-     * Return whether or not to schedule another tick
+     * Return whether to schedule another tick
      * immediately following the current tick.
      *
      * @protected
@@ -40,7 +39,7 @@ export abstract class Tickable {
         try {
             await this.onTick();
         } catch (e) {
-            Logger.err(`Threw error during tick: ${(e as Error).message}`);
+            console.error(`Threw error during tick: ${(e as Error).message}`);
         }
 
 

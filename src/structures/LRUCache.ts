@@ -1,5 +1,5 @@
 import {LinkedList, LinkedListNode} from "./LinkedList";
-import {random_choice, random_range} from "../functions";
+import {random_choice, random_range} from "../utils/functions";
 
 export interface ICache<T> {
     write(key: string, item: T): T;
