@@ -44,8 +44,8 @@ export class Sett<T> implements ISet<T> {
         return toReturn;
     }
 
-    intersection(other: ISet<T>): Sett<T> {
-        let sharedItems: T[] = Array.from(this.set).filter(item => other.has(item));
+    intersection<C extends Iterable<T>>(other: C): Sett<T> {
+        let sharedItems: T[] = Array.from(other).filter(item => this.has(item));
 
         return new Sett<T>(sharedItems);
     }
@@ -58,7 +58,7 @@ export class Sett<T> implements ISet<T> {
         return 0;
     }
 
-    union(other: ISet<T>): Sett<T> {
+    union<C extends Iterable<T>>(other: C): Sett<T> {
         let toReturn = new Sett(this.set);
 
         for (let item of Array.from(other)) {
