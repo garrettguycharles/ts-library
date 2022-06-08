@@ -1,6 +1,7 @@
-import {Entity, IEntity} from "./Entity";
+import {Entity, IEntity, ISearchableEntity, SearchableEntity} from "./Entity";
+import {getAllStringBearingHashPaths} from "../utils/functions";
 
-export interface IUser extends IEntity {
+export interface IUser extends ISearchableEntity {
     /**
      * login email
      */
@@ -41,7 +42,7 @@ export interface ISecureUser extends IUser {
     permissions: string[];
 }
 
-export class User extends Entity<IUser> implements IUser {
+export class User extends SearchableEntity<IUser> implements IUser {
     email = "";
     family_name = "";
     given_name = "";
