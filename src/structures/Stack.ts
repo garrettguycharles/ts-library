@@ -8,6 +8,10 @@ export interface IStack<T> extends Iterable<T> {
 export class Stack<T> implements IStack<T> {
     stack: T[] = [];
 
+    constructor(init: Iterable<T> = []) {
+        this.stack = Array.from(init);
+    }
+
     peek(): T | undefined {
         if (this.stack.length) {
             return this.stack[this.stack.length - 1];
