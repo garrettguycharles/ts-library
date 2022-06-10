@@ -1,11 +1,20 @@
 export interface IStack<T> extends Iterable<T> {
     push(t: T): void;
     pop(): T | undefined;
+    peek(): T | undefined;
     size(): number;
 }
 
-export class ArrayStack<T> implements IStack<T> {
+export class Stack<T> implements IStack<T> {
     stack: T[] = [];
+
+    peek(): T | undefined {
+        if (this.stack.length) {
+            return this.stack[this.stack.length - 1];
+        }
+
+        return undefined;
+    }
 
     pop(): T | undefined {
         if (this.stack.length) {
