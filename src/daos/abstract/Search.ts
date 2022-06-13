@@ -2,7 +2,6 @@ import {ISearchableEntity} from "../../entities/Entity";
 import {SearchQuery} from "./Dao";
 import {Semaphore} from "../../engines/Semaphore";
 import {getAllStringBearingHashPaths, getValueAtHashPath} from "../../utils/functions";
-import {User} from "../../entities/User";
 import {InternalServerError} from "../../entities/error/PrefixedErrors";
 
 export interface ISearch<T extends ISearchableEntity> {

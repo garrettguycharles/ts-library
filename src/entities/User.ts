@@ -1,5 +1,4 @@
-import {Entity, IEntity, ISearchableEntity, SearchableEntity} from "./Entity";
-import {getAllStringBearingHashPaths} from "../utils/functions";
+import {ISearchableEntity, SearchableEntity} from "./Entity";
 
 export interface IUser extends ISearchableEntity {
     /**

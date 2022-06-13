@@ -1,4 +1,3 @@
-import {Entity, IEntity} from "../../Entity";
 import {IAuthentication} from "./Authentication";
 
 export interface IHttpRequest<AuthType, PayloadType> {

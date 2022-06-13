@@ -1,6 +1,5 @@
 import {Tickable} from "./Tickable";
 import {LinkedList} from "../structures/LinkedList";
-import {sleep} from "../utils/functions";
 
 export class SemaphoreFunctionCall {
     resolve: (value: any) => void;
