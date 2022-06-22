@@ -84,3 +84,7 @@ export const getValueAtHashPath = (path: string, obj: any): any | undefined => {
         return undefined;
     }
 }
+
+export const setImmediate = (fn: () => any): NodeJS.Timeout => {
+    return setTimeout(fn, 0);
+}
