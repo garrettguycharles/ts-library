@@ -39,7 +39,7 @@ export abstract class Tickable {
         try {
             await this.onTick();
         } catch (e) {
-            console.error(`Threw error during tick: ${(e as Error).message}`);
+            console.error(`Threw error in tick():`, e);
         }
 
 
