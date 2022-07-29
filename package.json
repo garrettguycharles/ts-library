@@ -5,6 +5,7 @@
     "@types/argon2": "^0.15.0",
     "@types/uuid": "^8.3.4",
     "argon2": "^0.28.5",
+    "colors": "^1.4.0",
     "jet-logger": "^1.1.5",
     "nodemon": "^2.0.16",
     "ts-node": "^10.8.1",
