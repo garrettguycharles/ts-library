@@ -87,27 +87,3 @@ export class LRUCache<T> implements ICache<T> {
         return toReturnArr.join(" -> ");
     }
 }
-
-let cache = new LRUCache<number>(100);
-
-for (let i = 0; i < 30; i++) {
-    if (!random_range(0, 5)) {
-        cache.kick(random_choice(Object.keys(cache.nodeMap)));
-    }
-
-    cache.write(i.toString(), i);
-
-    const toRead = random_range(0, i).toString()
-    const didRead = cache.read(toRead);;
-
-    if (didRead) {
-        // @ts-ignore
-        console.log(`Read ${toRead}. Cache head: ${cache.list.head.value.key}`);
-    }
-
-    console.log(cache.size());
-    console.log(cache.toString());
-}
-
-console.log(cache.toString());
-console.log(`Hits: ${cache.hits}, Misses: ${cache.misses}`);

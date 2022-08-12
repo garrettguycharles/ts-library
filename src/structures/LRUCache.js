@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LRUCache = void 0;
 const LinkedList_1 = require("./LinkedList");
-const functions_1 = require("../utils/functions");
 class LRUCacheEntry {
     key;
     item;
@@ -68,21 +67,4 @@ class LRUCache {
     }
 }
 exports.LRUCache = LRUCache;
-let cache = new LRUCache(100);
-for (let i = 0; i < 30; i++) {
-    if (!(0, functions_1.random_range)(0, 5)) {
-        cache.kick((0, functions_1.random_choice)(Object.keys(cache.nodeMap)));
-    }
-    cache.write(i.toString(), i);
-    const toRead = (0, functions_1.random_range)(0, i).toString();
-    const didRead = cache.read(toRead);
-    ;
-    if (didRead) {
-        console.log(`Read ${toRead}. Cache head: ${cache.list.head.value.key}`);
-    }
-    console.log(cache.size());
-    console.log(cache.toString());
-}
-console.log(cache.toString());
-console.log(`Hits: ${cache.hits}, Misses: ${cache.misses}`);
 //# sourceMappingURL=LRUCache.js.map
