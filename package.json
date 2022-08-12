@@ -1,6 +1,6 @@
 {
   "name": "ts-library",
-  "version": "0.0.0.1",
+  "version": "0.0.1",
   "scripts": {
     "build": "tsc --build",
     "test": "jest --coverage --watchAll=false"
