@@ -2,7 +2,7 @@ import {RsaService} from "./RsaService";
 import {randomBytes, randomUUID} from "crypto";
 import {hash, verify} from "argon2";
 import {AesService} from "./AesService";
-import Logger from "jet-logger";
+import {log} from "../logger/Logger";
 
 export interface CryptoChallenge {
     challenge_id: string;
@@ -88,7 +88,7 @@ export class CryptoService {
 
             return outcome;
         } catch (e) {
-            Logger.err(e);
+            log.error(e as Error);
             return false;
         }
     }

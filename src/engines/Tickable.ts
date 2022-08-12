@@ -1,7 +1,7 @@
-import {sleep} from "../utils/functions";
+import {sleep, setImmediate} from "../utils/functions";
 
 export abstract class Tickable {
-    private scheduled_tick: NodeJS.Immediate | undefined;
+    private scheduled_tick: NodeJS.Timeout | undefined;
     private tick_delay = 0;
 
     constructor() {
@@ -13,7 +13,7 @@ export abstract class Tickable {
      * you want to run every tick.
      * @protected
      */
-    protected abstract onTick(): Promise<void>;
+    protected abstract onTick(): Promise<void> | void;
 
     /**
      * Return whether to schedule another tick
@@ -39,7 +39,7 @@ export abstract class Tickable {
         try {
             await this.onTick();
         } catch (e) {
-            console.error(`Threw error during tick: ${(e as Error).message}`);
+            console.error(`Threw error in tick():`, e);
         }
 
 
