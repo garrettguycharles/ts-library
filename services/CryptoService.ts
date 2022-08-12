@@ -2,7 +2,9 @@ import {RsaService} from "./RsaService";
 import {randomBytes, randomUUID} from "crypto";
 import {hash, verify} from "argon2";
 import {AesService} from "./AesService";
-import {log} from "../logger/Logger";
+import {Logger} from "../logging/Logger";
+
+const log = new Logger();
 
 export interface CryptoChallenge {
     challenge_id: string;

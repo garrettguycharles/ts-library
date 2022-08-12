@@ -5,7 +5,8 @@ const RsaService_1 = require("./RsaService");
 const crypto_1 = require("crypto");
 const argon2_1 = require("argon2");
 const AesService_1 = require("./AesService");
-const Logger_1 = require("../logger/Logger");
+const Logger_1 = require("../logging/Logger");
+const log = new Logger_1.Logger();
 const challenges = {};
 class CryptoService {
     static async generateChallenge(publicKey) {
@@ -53,7 +54,7 @@ class CryptoService {
             return outcome;
         }
         catch (e) {
-            Logger_1.log.error(e);
+            log.error(e);
             return false;
         }
     }
