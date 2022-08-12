@@ -30,6 +30,7 @@ jspm_packages/
 .env
 .env.test
 
-./src
-./test
+src
+test
 jest.config.ts
+.npminclude
