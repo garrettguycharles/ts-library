@@ -25,7 +25,9 @@
   "files": [
     "/package.json",
     "/tsconfig.json",
-    "/dist",
-    "/index.js"
+    "/src/**/*.js*",
+    "/src/**/*.d.ts*",
+    "/index.js*",
+    "/index.d.ts*"
   ]
 }
