@@ -101,6 +101,7 @@
   },
   "exclude": [
     "test",
-    "dist"
+    "dist",
+    "jest.config.*"
   ]
 }
