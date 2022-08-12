@@ -1,0 +1,1 @@
+{"version":3,"file":"Handler.js","sourceRoot":"","sources":["../../../../entities/action/abstract/Handler.ts"],"names":[],"mappings":";;;AASA,MAAsB,aAAa;IAG/B,KAAK,CAAC,aAAa,CAAC,GAA2C;QAC3D,MAAM,gBAAgB,GAAG,MAAM,IAAI,CAAC,wBAAwB,EAAE,CAAC,mBAAmB,CAAC,GAAG,CAAC,cAAc,CAAC,CAAC;QAEvG,OAAO,IAAI,CAAC,2BAA2B,CAAC,GAAG,EAAE,gBAAgB,CAAC,CAAC;IACnE,CAAC;CAOJ;AAdD,sCAcC"}

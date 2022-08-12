@@ -16,10 +16,6 @@ export declare abstract class NoSecurityClearance implements ISecurityClearance<
 }
 export declare abstract class AuthtokenSecurityClearance<EntityPackageType extends IVerifiedEntityPackage> implements ISecurityClearance<IAuthToken, EntityPackageType> {
     verifyUserClearance(authentication: Authentication<IAuthToken>): Promise<EntityPackageType>;
-    /**
-     * Throw an error to disallow the user.
-     * @param secureUser
-     */
     abstract packageEntities_orThrowError(secureUser: ISecureUser): Promise<EntityPackageType> | EntityPackageType;
 }
 //# sourceMappingURL=SecurityClearance.d.ts.map

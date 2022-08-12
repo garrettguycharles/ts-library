@@ -9,3 +9,4 @@ class HttpResponse {
     }
 }
 exports.HttpResponse = HttpResponse;
+//# sourceMappingURL=Response.js.map

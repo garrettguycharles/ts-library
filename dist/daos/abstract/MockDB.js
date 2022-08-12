@@ -72,3 +72,4 @@ class MockDBSearchableDao extends MockDBDao {
     }
 }
 exports.MockDBSearchableDao = MockDBSearchableDao;
+//# sourceMappingURL=MockDB.js.map

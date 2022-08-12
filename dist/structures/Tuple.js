@@ -41,3 +41,4 @@ class Tuple {
     }
 }
 exports.Tuple = Tuple;
+//# sourceMappingURL=Tuple.js.map

@@ -9,14 +9,12 @@ const Logger_1 = require("../logger/Logger");
 const challenges = {};
 class CryptoService {
     static async generateChallenge(publicKey) {
-        // console.log(`Challenges size: ${Object.keys(challenges).length}`);
         const newId = (0, crypto_1.randomUUID)();
         const challengeBody = (0, crypto_1.randomBytes)(2048).toString("base64");
         const plainSecret = await AesService_1.AesService.generateSecretKey();
         const encryptedPackage = await AesService_1.AesService
             .encryptStringWithPasskey(challengeBody, plainSecret);
         const encryptedSecret = await RsaService_1.RsaService.encryptStringWithPublicKey(plainSecret, publicKey);
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-call
         const hashedChallenge = await (0, argon2_1.hash)(challengeBody);
         const solution = new class {
             challenge_id = newId;
@@ -48,7 +46,6 @@ class CryptoService {
             return false;
         }
         try {
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-call
             const outcome = await (0, argon2_1.verify)(stored_solution.solution, solution.solution);
             if (outcome) {
                 delete challenges[solution.challenge_id];
@@ -62,3 +59,4 @@ class CryptoService {
     }
 }
 exports.CryptoService = CryptoService;
+//# sourceMappingURL=CryptoService.js.map

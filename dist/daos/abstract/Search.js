@@ -4,7 +4,6 @@ exports.Search = void 0;
 const Semaphore_1 = require("../../engines/Semaphore");
 const functions_1 = require("../../utils/functions");
 const PrefixedErrors_1 = require("../../entities/error/PrefixedErrors");
-// TODO: add "Remove" functionality to delete a search index.
 class Search {
     map = {};
     items = {};
@@ -67,32 +66,4 @@ class Search {
     }
 }
 exports.Search = Search;
-// const garrett = new User().withGivenName("Garrett").withFamilyName("Charles");
-// const emma = new User().withGivenName("Emma").withFamilyName("Charles");
-//
-// const search = new Search<User>();
-//
-// async function test() {
-//     let start = Date.now();
-//     for (let i = 0; i < 10; i++) {
-//         await search.ingest(garrett);
-//         garrett.family_name += "again";
-//     }
-//
-//     garrett.family_name = "";
-//     search.ingest(garrett);
-//     await search.ingest(emma);
-//     let end = Date.now();
-//     console.log(search.item_counter, `${end - start}ms`);
-//
-//     const queries = [
-//         new SearchQuery().withHashPath("given_name").withQuery("ga"),
-//         new SearchQuery().withHashPath("family_name").withQuery("le")
-//     ];
-//
-//     for (const q of queries) {
-//         console.log(await search.search(q));
-//     }
-// }
-//
-// test();
+//# sourceMappingURL=Search.js.map

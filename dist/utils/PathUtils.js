@@ -25,11 +25,6 @@ class PathUtils {
         }
         return path.split(separator);
     }
-    /**
-     * removes the last segment of the path,
-     * and returns the parent dir
-     * @param path
-     */
     static getPathWithoutLeaf(filepath) {
         let separator = this.getPathDelimiter();
         let parent_path = PathUtils.join(...PathUtils.split(filepath).slice(0, -1));
@@ -39,7 +34,6 @@ class PathUtils {
         return parent_path;
     }
     static join(...segments) {
-        // TODO: add extra segment validation here
         return path_1.default.join(...segments).replace(/\\/g, "/");
     }
     static graft(parent, child) {
@@ -51,13 +45,11 @@ class PathUtils {
     static resolve(newPath, currentDir = process.cwd()) {
         const delimiter = this.getPathDelimiter(newPath);
         if (this.isRelativePath(newPath)) {
-            // return a join
             return PathUtils.join(path_1.default.resolve(currentDir), newPath);
         }
         if (this.isAbsolutePath(newPath)) {
             return path_1.default.resolve(newPath);
         }
-        // is a path like `models/nextDir/model.graphml`
         const toReturn = this.graft(currentDir, newPath);
         return path_1.default.resolve(toReturn);
     }
@@ -92,14 +84,8 @@ class PathUtils {
     }
     static importCache = {};
     static directoriesRead = {};
-    /**
-     * Returns an absolute path to a file.
-     * @param importFileName the name of the expected import file, including file extension
-     * @param startPath Where to begin searching for the import.
-     */
     static resolveImportPath(importFileName, startPath) {
         if (!PathUtils.importCache[importFileName]) {
-            // populate cache
             PathUtils.importCache[importFileName] = "";
             let visitedDirs = new Set();
             function searchDir(dirPath) {
@@ -150,16 +136,10 @@ class PathUtils {
         return PathUtils.importCache[importFileName];
     }
     static MaxUpwardImportResolutionSteps = 4;
-    /**
-     * Returns the relative path from one absolute path to another
-     * @param fromAbsolute
-     * @param toAbsolute
-     */
     static findRelativePath(fromAbsolute, toAbsolute) {
         if (fromAbsolute === toAbsolute) {
             return ".";
         }
-        // determine if fromAbsolute refers to a file or directory
         let isDirectory = false;
         let isFile = false;
         try {
@@ -168,15 +148,11 @@ class PathUtils {
             isFile = !isDirectory;
         }
         catch (e) {
-            // swallow error
         }
         if (isFile) {
-            // the path is a file, so remove the leaf
             fromAbsolute = PathUtils.getPathWithoutLeaf(fromAbsolute);
         }
         else if (!isDirectory) {
-            // this means that the file doesn't exist (fs.statSync threw an error above), so we have to guess.
-            // if fromAbsolute is a file, remove the leaf
             if (/(?<=.+)\.(ts|js|graphml|drawio|json|txt|java|cpp|c|py)$/.test(PathUtils.getLeaf(fromAbsolute).trim())) {
                 fromAbsolute = PathUtils.getPathWithoutLeaf(fromAbsolute);
             }
@@ -196,3 +172,4 @@ class PathUtils {
     }
 }
 exports.PathUtils = PathUtils;
+//# sourceMappingURL=PathUtils.js.map

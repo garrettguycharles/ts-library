@@ -11,3 +11,4 @@ class TextFileReader {
     }
 }
 exports.TextFileReader = TextFileReader;
+//# sourceMappingURL=FileReader.js.map

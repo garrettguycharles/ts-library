@@ -9,7 +9,7 @@ class ApiLogger extends Logger_1.Logger {
         this.url = url;
     }
     log(level, message) {
-        // axios.post(this.url, {level: level, message: message});
     }
 }
 exports.ApiLogger = ApiLogger;
+//# sourceMappingURL=ApiLogger.js.map

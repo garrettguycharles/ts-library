@@ -9,7 +9,6 @@ class Observable {
                 observer.onNotification();
             }
             else {
-                // remove this observer
                 this.observers = this.observers.filter(o => o !== observer);
             }
         }
@@ -32,3 +31,4 @@ class Observer {
     }
 }
 exports.Observer = Observer;
+//# sourceMappingURL=Observable.js.map

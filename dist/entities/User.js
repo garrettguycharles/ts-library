@@ -48,3 +48,4 @@ class SecureUser extends User {
     }
 }
 exports.SecureUser = SecureUser;
+//# sourceMappingURL=User.js.map

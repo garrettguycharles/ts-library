@@ -54,7 +54,6 @@ class Logger {
             hour: "numeric",
             minute: "numeric",
             second: "numeric",
-            // @ts-ignore
             fractionalSecondDigits: 3
         });
     }
@@ -63,7 +62,6 @@ class Logger {
             return message;
         }
         else {
-            // message is error
             return `${message.message}:\nStack Trace: ${message.stack}`;
         }
     }
@@ -128,3 +126,4 @@ class FileWriterLogger extends Logger {
     }
 }
 exports.FileWriterLogger = FileWriterLogger;
+//# sourceMappingURL=Logger.js.map

@@ -36,35 +36,26 @@ class Entity {
     }
     from(other) {
         const validKeys = this.getInterfaceKeys();
-        // copy valid values
         for (const key of validKeys) {
-            // @ts-ignore
             const otherVal = other[key];
             if (otherVal) {
-                // @ts-ignore
                 if (Array.isArray(this[key])) {
-                    // handle array
                     if (otherVal.length === 0) {
                         continue;
                     }
                     if (otherVal[0]["from"] === "function") {
                         for (const item of otherVal[0]) {
-                            // @ts-ignore
                             this[key].push(new item.constructor().from(item));
                         }
                     }
                     else {
-                        // @ts-ignore
                         this[key] = [...otherVal];
                     }
-                    // @ts-ignore
                 }
                 else if (typeof this[key]["from"] === "function") {
-                    // @ts-ignore
                     this[key].from(other[key]);
                 }
                 else {
-                    // @ts-ignore
                     this[key] = otherVal;
                 }
             }
@@ -72,8 +63,6 @@ class Entity {
         return this;
     }
     getInterfaceKeys() {
-        // get blank implementation
-        // @ts-ignore
         const blankImpl = new this.constructor();
         return Object.keys(blankImpl).filter(k => {
             return typeof blankImpl[k] !== "function";
@@ -88,9 +77,7 @@ class SearchableEntity extends Entity {
         return this;
     }
     buildSearchable() {
-        // @ts-ignore
         const validKeys = this.getInterfaceKeys().filter(k => typeof this[k] === "string");
-        // @ts-ignore
         return validKeys.map(k => this[k].toLowerCase().replace(/\s/g, "")).filter(s => s.length && s.length < 128);
     }
     populateSearchable() {
@@ -99,3 +86,4 @@ class SearchableEntity extends Entity {
     }
 }
 exports.SearchableEntity = SearchableEntity;
+//# sourceMappingURL=Entity.js.map

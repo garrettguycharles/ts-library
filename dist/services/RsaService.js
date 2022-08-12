@@ -24,15 +24,7 @@ class RsaService {
             public = toReturn.publicKey;
         };
     }
-    /**
-     * Encrypt a string using a public key.
-     *
-     * @param payload string to encrypt
-     * @param publicKey key to use for encryption
-     * @return a JSON string containing an array of chunked encrypted strings
-     */
     static async encryptStringWithPublicKey(payload, publicKey) {
-        // console.log(payload, publicKey);
         const chunks = RsaService.chunkLongString(payload);
         const toReturn = [];
         for (const chunk of chunks) {
@@ -43,12 +35,6 @@ class RsaService {
         }
         return toReturn;
     }
-    /**
-     * Decrypt a string which was previously encrypted using encryptStringWithPublicKey
-     * @param json JSON string containing array of chunked encrypted strings
-     * @param privateKey private key to use for decryption
-     * @returns a decrypted string
-     */
     static async decryptStringWithPrivateKey(payload, privateKey) {
         let toReturn = "";
         for (const chunk of payload) {
@@ -69,3 +55,4 @@ class RsaService {
     }
 }
 exports.RsaService = RsaService;
+//# sourceMappingURL=RsaService.js.map

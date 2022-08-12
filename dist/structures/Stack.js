@@ -29,3 +29,4 @@ class Stack {
     }
 }
 exports.Stack = Stack;
+//# sourceMappingURL=Stack.js.map

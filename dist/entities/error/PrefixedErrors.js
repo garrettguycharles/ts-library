@@ -11,10 +11,6 @@ class BadRequestError extends PrefixedError_1.PrefixedError {
     }
 }
 exports.BadRequestError = BadRequestError;
-/**
- * Send this when the client is signed-in, but
- * lacks permissions required for this resource
- */
 class InsufficientPrivilegesError extends PrefixedError_1.PrefixedError {
     getPrefix() {
         return "[INSUFFICIENT PRIVILEGES]";
@@ -24,10 +20,6 @@ class InsufficientPrivilegesError extends PrefixedError_1.PrefixedError {
     }
 }
 exports.InsufficientPrivilegesError = InsufficientPrivilegesError;
-/**
- * Send this when you want the client to sign-in
- * (or sign-in again).
- */
 class UnauthenticatedError extends PrefixedError_1.PrefixedError {
     getPrefix() {
         return "[UNAUTHENTICATED]";
@@ -46,3 +38,4 @@ class InternalServerError extends PrefixedError_1.PrefixedError {
     }
 }
 exports.InternalServerError = InternalServerError;
+//# sourceMappingURL=PrefixedErrors.js.map

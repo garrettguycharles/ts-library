@@ -6,27 +6,13 @@ class AesService {
     static async generateSecretKey() {
         return Promise.resolve((0, crypto_1.randomBytes)(32).toString("base64"));
     }
-    /**
-     * Encrypt a string using a public key.
-     *
-     * @param payload string to encrypt
-     * @param passkey key to use for encryption
-     * @return a JSON string containing an array of chunked encrypted strings
-     */
     static async encryptStringWithPasskey(payload, secret) {
         const algorithm = "aes-256-cbc";
-        // generate 16 bytes of random data
         const initVector = (0, crypto_1.randomBytes)(16);
-        // // secret key generate 32 bytes of random data
-        // const Securitykey = randomBytes(32);
         const Securitykey = Buffer.from(secret, "base64");
-        // the cipher function
         const cipher = (0, crypto_1.createCipheriv)(algorithm, Securitykey, initVector);
         const chunks = AesService.chunkLongString(payload);
         const encryptedChunks = [];
-        // encrypt the message
-        // input encoding
-        // output encoding
         for (const chunk of chunks) {
             encryptedChunks.push(cipher.update(chunk, "utf-8", "hex"));
         }
@@ -57,3 +43,4 @@ class AesService {
     }
 }
 exports.AesService = AesService;
+//# sourceMappingURL=AesService.js.map

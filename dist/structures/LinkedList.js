@@ -165,7 +165,7 @@ class LinkedList {
             this.size += 1;
             return newNode;
         }
-        else { // if ((previous === undefined) && next) {
+        else {
             return this.pushHead(value);
         }
     }
@@ -181,7 +181,7 @@ class LinkedList {
             this.size += 1;
             return newNode;
         }
-        else { // if (previous && (next === undefined)) {
+        else {
             return this.pushTail(value);
         }
     }
@@ -193,17 +193,4 @@ class LinkedList {
     }
 }
 exports.LinkedList = LinkedList;
-// const list = new LinkedList<number>();
-// list.pushHead(3);
-// const two = list.pushHead(2);
-// const one = list.pushHead(1);
-// list.pushHead(0);
-// list.pushTail(4);
-//
-// list.pluckNode(two);
-// list.insertAfterNode(one, 2);
-//
-// console.log(list.tail?.value);
-// console.log(list.head?.value);
-// console.log(list.toString());
-// console.log(list.toStringReverse());
+//# sourceMappingURL=LinkedList.js.map

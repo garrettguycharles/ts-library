@@ -48,7 +48,6 @@ class Logger {
             return message;
         }
         else {
-            // message is error
             return `${message.message}:\nStack Trace: ${message.stack}`;
         }
     }
@@ -93,3 +92,4 @@ class Logger {
 }
 exports.Logger = Logger;
 exports.log = new Logger();
+//# sourceMappingURL=Logger.js.map

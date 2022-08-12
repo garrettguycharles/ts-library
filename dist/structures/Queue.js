@@ -28,3 +28,4 @@ class LinkedListQueue {
     }
 }
 exports.LinkedListQueue = LinkedListQueue;
+//# sourceMappingURL=Queue.js.map

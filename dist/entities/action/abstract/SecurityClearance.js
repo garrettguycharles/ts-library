@@ -18,9 +18,9 @@ exports.NoSecurityClearance = NoSecurityClearance;
 class AuthtokenSecurityClearance {
     async verifyUserClearance(authentication) {
         const token = new AuthToken_1.AuthToken().from(authentication.payload);
-        // TODO: get secure user using authentication.payload
         const user = new User_1.SecureUser();
         return this.packageEntities_orThrowError(user);
     }
 }
 exports.AuthtokenSecurityClearance = AuthtokenSecurityClearance;
+//# sourceMappingURL=SecurityClearance.js.map

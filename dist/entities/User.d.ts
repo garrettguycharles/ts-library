@@ -1,35 +1,13 @@
 import { ISearchableEntity, SearchableEntity } from "./Entity";
 export interface IUser extends ISearchableEntity {
-    /**
-     * login email
-     */
     email: string;
-    /**
-     * user's given name
-     */
     given_name: string;
-    /**
-     * user's family name
-     */
     family_name: string;
-    /**
-     * user's avatar image.
-     */
     avatar: string;
 }
 export interface ISecureUser extends IUser {
-    /**
-     * stored password hash
-     */
     hash: string;
-    /**
-     * stored password salt
-     */
     salt: string;
-    /**
-     * User roles. This links users to their permissions.
-     * (foreign key to IUserRole)
-     */
     roles: string[];
     permissions: string[];
 }

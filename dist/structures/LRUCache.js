@@ -78,7 +78,6 @@ for (let i = 0; i < 30; i++) {
     const didRead = cache.read(toRead);
     ;
     if (didRead) {
-        // @ts-ignore
         console.log(`Read ${toRead}. Cache head: ${cache.list.head.value.key}`);
     }
     console.log(cache.size());
@@ -86,3 +85,4 @@ for (let i = 0; i < 30; i++) {
 }
 console.log(cache.toString());
 console.log(`Hits: ${cache.hits}, Misses: ${cache.misses}`);
+//# sourceMappingURL=LRUCache.js.map

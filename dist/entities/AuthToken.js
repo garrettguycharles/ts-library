@@ -15,3 +15,4 @@ class AuthToken extends Entity_1.Entity {
     }
 }
 exports.AuthToken = AuthToken;
+//# sourceMappingURL=AuthToken.js.map

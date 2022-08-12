@@ -52,3 +52,4 @@ class Semaphore extends Tickable_1.Tickable {
     }
 }
 exports.Semaphore = Semaphore;
+//# sourceMappingURL=Semaphore.js.map

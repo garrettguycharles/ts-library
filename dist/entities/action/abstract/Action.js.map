@@ -1,0 +1,1 @@
+{"version":3,"file":"Action.js","sourceRoot":"","sources":["../../../../entities/action/abstract/Action.ts"],"names":[],"mappings":";;;AAAA,yDAAsE;AACtE,2DAAyE;AAEzE,MAAa,MAAM;IACf,YAAY;QACR,OAAO,IAAI,qBAAW,EAA4B,CAAC;IACvD,CAAC;IAED,aAAa;QACT,OAAO,IAAI,uBAAY,EAAkB,CAAC;IAC9C,CAAC;CACJ;AARD,wBAQC"}

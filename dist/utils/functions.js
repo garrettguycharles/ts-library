@@ -32,10 +32,6 @@ function prettyFormatDate(date) {
     });
 }
 exports.prettyFormatDate = prettyFormatDate;
-/**
- * Returns all hashpaths within obj which resolve to a string value.
- * @param obj
- */
 function getAllStringBearingHashPaths(obj) {
     const visited = new Set();
     function getObjectPaths(obj) {
@@ -83,3 +79,4 @@ const setImmediate = (fn) => {
     return setTimeout(fn, 0);
 };
 exports.setImmediate = setImmediate;
+//# sourceMappingURL=functions.js.map

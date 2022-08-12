@@ -14,3 +14,4 @@ class HttpRequest {
     }
 }
 exports.HttpRequest = HttpRequest;
+//# sourceMappingURL=Request.js.map

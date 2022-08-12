@@ -8,12 +8,6 @@ class Tickable {
     constructor() {
         (0, functions_1.setImmediate)(this.scheduleTick.bind(this));
     }
-    /**
-     * Set the tick delay. Each tick will wait this long
-     * before continuing.
-     *
-     * @param ms
-     */
     setTickDelay(ms) {
         this.tick_delay = ms;
     }
@@ -32,7 +26,6 @@ class Tickable {
     }
     scheduleTick() {
         if (!this.scheduled_tick) {
-            // eslint-disable-next-line @typescript-eslint/no-misused-promises
             this.scheduled_tick = (0, functions_1.setImmediate)(this.tick.bind(this));
         }
     }
@@ -64,3 +57,4 @@ class TestableTickableSpy extends Tickable {
     }
 }
 exports.TestableTickableSpy = TestableTickableSpy;
+//# sourceMappingURL=Tickable.js.map
