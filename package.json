@@ -19,5 +19,10 @@
   },
   "devDependencies": {
     "@types/jest": "^28.1.6"
-  }
+  },
+  "files": [
+    "package.json",
+    "tsconfig.json",
+    "dist"
+  ]
 }
