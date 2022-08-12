@@ -1,0 +1,1 @@
+{"version":3,"file":"Action.d.ts","sourceRoot":"","sources":["../../../../entities/action/abstract/Action.ts"],"names":[],"mappings":"AAAA,OAAO,EAAc,YAAY,EAAC,MAAM,6BAA6B,CAAC;AACtE,OAAO,EAAe,aAAa,EAAC,MAAM,8BAA8B,CAAC;AAEzE,qBAAa,MAAM,CAAC,QAAQ,EAAE,cAAc,EAAE,cAAc;IACxD,YAAY,IAAI,YAAY,CAAC,QAAQ,EAAE,cAAc,CAAC;IAItD,aAAa,IAAI,aAAa,CAAC,cAAc,CAAC;CAGjD"}

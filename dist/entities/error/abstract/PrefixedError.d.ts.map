@@ -1,0 +1,1 @@
+{"version":3,"file":"PrefixedError.d.ts","sourceRoot":"","sources":["../../../../entities/error/abstract/PrefixedError.ts"],"names":[],"mappings":"AAAA;;;;;;GAMG;AACH,8BAAsB,aAAc,SAAQ,KAAK;IAC7C;;;OAGG;gBACS,OAAO,EAAE,MAAM;IAK3B;;;OAGG;aACa,SAAS,IAAI,MAAM;IAEnC;;OAEG;aACa,eAAe,IAAI,MAAM;CAC5C;AAED,wBAAgB,eAAe,CAAC,CAAC,EAAE,GAAG,GAAG,CAAC,IAAI,aAAa,CAG1D"}
