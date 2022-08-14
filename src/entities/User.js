@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SecureUser = exports.User = void 0;
+exports.TAGS = exports.SecureUser = exports.User = void 0;
 const Entity_1 = require("./Entity");
-class User extends Entity_1.SearchableEntity {
+class User extends Entity_1.Entity {
     email = "";
     family_name = "";
     given_name = "";
@@ -28,8 +28,8 @@ exports.User = User;
 class SecureUser extends User {
     hash = "";
     salt = "";
-    permissions = [];
     roles = [];
+    tags = [];
     withHash(hash) {
         this.hash = hash;
         return this;
@@ -42,10 +42,9 @@ class SecureUser extends User {
         this.roles = roles;
         return this;
     }
-    withPermissions(permissions) {
-        this.permissions = permissions;
-        return this;
-    }
 }
 exports.SecureUser = SecureUser;
+exports.TAGS = {
+    VENDOR: "VENDOR"
+};
 //# sourceMappingURL=User.js.map

@@ -1,6 +1,9 @@
-import {ISearchableEntity, SearchableEntity} from "./Entity";
+/**
+ * Model object for users.
+ */
+import {Entity, IEntity} from "./Entity";
 
-export interface IUser extends ISearchableEntity {
+export interface IUser extends IEntity {
     /**
      * login email
      */
@@ -38,10 +41,19 @@ export interface ISecureUser extends IUser {
      * (foreign key to IUserRole)
      */
     roles: string[];
-    permissions: string[];
+
+    /**
+     * Tags for miscellaneous use. This is a place to
+     * tie a user to other data. For example: when a user
+     * is added to an IVendor, put a tag in this user
+     * so that you can look up the user's vendor by the tag
+     * instead of doing an O(n^2) lookup through all of the
+     * vendors' admins and team members.
+     */
+    tags: string[];
 }
 
-export class User extends SearchableEntity<IUser> implements IUser {
+export class User extends Entity<IUser> implements IUser {
     email = "";
     family_name = "";
     given_name = "";
@@ -71,8 +83,8 @@ export class User extends SearchableEntity<IUser> implements IUser {
 export class SecureUser extends User implements ISecureUser {
     hash = "";
     salt = "";
-    permissions: string[] = [];
     roles: string[] = [];
+    tags: string[] = [];
 
     withHash(hash: string): SecureUser {
         this.hash = hash;
@@ -88,9 +100,8 @@ export class SecureUser extends User implements ISecureUser {
         this.roles = roles;
         return this;
     }
+}
 
-    withPermissions(permissions: string[]): SecureUser {
-        this.permissions = permissions;
-        return this;
-    }
+export const TAGS = {
+    VENDOR: "VENDOR"
 }

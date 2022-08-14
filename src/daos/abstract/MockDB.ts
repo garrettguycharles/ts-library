@@ -1,7 +1,7 @@
 import {IEntity, ISearchableEntity} from "../../entities/Entity";
 import {IDao, ISearchableDao, ResponseOptions, SearchQuery, SearchQueryOutcome} from "./Dao";
 import {Search} from "./Search";
-import {BadRequestError} from "../../entities/error/PrefixedErrors";
+import {BadRequestError} from "../../entities/net/error/PrefixedErrors";
 
 export class MockDBDao<T extends IEntity> implements IDao<T> {
 
