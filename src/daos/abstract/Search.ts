@@ -2,7 +2,7 @@ import {ISearchableEntity} from "../../entities/Entity";
 import {SearchQuery} from "./Dao";
 import {Semaphore} from "../../engines/Semaphore";
 import {getAllStringBearingHashPaths, getValueAtHashPath} from "../../utils/functions";
-import {InternalServerError} from "../../entities/net/error/PrefixedErrors";
+import {InternalServerError} from "../../server/net/error/PrefixedErrors";
 
 export interface ISearch<T extends ISearchableEntity> {
     ingest(item: T): void | Promise<void>;

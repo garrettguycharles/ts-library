@@ -5,9 +5,9 @@ import helmet from 'helmet';
 import 'express-async-errors';
 import {SecurityUtils} from "../utils/SecurityUtils";
 import {Logger} from "../logging/Logger";
-import {isPrefixedError, PrefixedError} from "../entities/net/error/abstract/PrefixedError";
-import {AbstractRequest, IRequest, IResponse} from "../entities/net/actions/abstract/HttpRequestResponse";
-import {PayloadResponse} from "../entities/net/actions/abstract/AbstractReqResTypes";
+import {isPrefixedError, PrefixedError} from "./net/error/abstract/PrefixedError";
+import {AbstractRequest, IRequest, IResponse} from "./net/actions/abstract/HttpRequestResponse";
+import {PayloadResponse} from "./net/actions/abstract/AbstractReqResTypes";
 
 export class Server {
     app: Express;
@@ -99,7 +99,7 @@ export interface IRequestHandler<RequestType extends IRequest, ResponseType exte
     constructRequest(body: any, params: {[key: string]: string}): RequestType;
 }
 
-const quickHandleRequest = async function (
+export const quickHandleRequest = async function (
     req: Request, res: Response,
     handler: IRequestHandler<any, any>
 ): Promise<any> {

@@ -1,7 +1,7 @@
 /**
  * Model object for users.
  */
-import {Entity, IEntity} from "./Entity";
+import {Entity, IEntity} from "../entities/Entity";
 
 export interface IUser extends IEntity {
     /**

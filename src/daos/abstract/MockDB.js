@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MockDBSearchableDao = exports.MockDBDao = void 0;
 const Dao_1 = require("./Dao");
-const PrefixedErrors_1 = require("../../entities/net/error/PrefixedErrors");
+const PrefixedErrors_1 = require("../../server/net/error/PrefixedErrors");
 class MockDBDao {
     db;
     constructor(db = []) {

@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TAGS = exports.SecureUser = exports.User = void 0;
-const Entity_1 = require("./Entity");
+const Entity_1 = require("../entities/Entity");
 class User extends Entity_1.Entity {
     email = "";
     family_name = "";

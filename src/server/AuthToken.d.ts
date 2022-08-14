@@ -1,4 +1,4 @@
-import { Entity, IEntity } from "./Entity";
+import { Entity, IEntity } from "../entities/Entity";
 export interface IAuthToken extends IEntity {
     id: string;
     timestamp: number;

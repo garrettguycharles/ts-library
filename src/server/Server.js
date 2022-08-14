@@ -26,7 +26,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Server = void 0;
+exports.quickHandleRequest = exports.Server = void 0;
 const express_1 = __importStar(require("express"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const morgan_1 = __importDefault(require("morgan"));
@@ -34,7 +34,7 @@ const helmet_1 = __importDefault(require("helmet"));
 require("express-async-errors");
 const SecurityUtils_1 = require("../utils/SecurityUtils");
 const Logger_1 = require("../logging/Logger");
-const PrefixedError_1 = require("../entities/net/error/abstract/PrefixedError");
+const PrefixedError_1 = require("./net/error/abstract/PrefixedError");
 class Server {
     app;
     router;
@@ -103,4 +103,5 @@ const quickHandleRequest = async function (req, res, handler) {
     const response = handler.handle(request);
     return res.status(200).send(response);
 };
+exports.quickHandleRequest = quickHandleRequest;
 //# sourceMappingURL=Server.js.map

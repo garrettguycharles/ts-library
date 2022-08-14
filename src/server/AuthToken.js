@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthToken = void 0;
-const Entity_1 = require("./Entity");
+const Entity_1 = require("../entities/Entity");
 class AuthToken extends Entity_1.Entity {
     timestamp = 0;
     user_id = "";

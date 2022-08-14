@@ -1,6 +1,6 @@
 import express, { Express, Request, Response, Router } from "express";
 import 'express-async-errors';
-import { IRequest, IResponse } from "../entities/net/actions/abstract/HttpRequestResponse";
+import { IRequest, IResponse } from "./net/actions/abstract/HttpRequestResponse";
 export declare class Server {
     app: Express;
     router: Router;
@@ -16,4 +16,5 @@ export interface IRequestHandler<RequestType extends IRequest, ResponseType exte
         [key: string]: string;
     }): RequestType;
 }
+export declare const quickHandleRequest: (req: Request, res: Response, handler: IRequestHandler<any, any>) => Promise<any>;
 //# sourceMappingURL=Server.d.ts.map

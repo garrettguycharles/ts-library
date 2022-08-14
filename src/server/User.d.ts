@@ -1,4 +1,4 @@
-import { Entity, IEntity } from "./Entity";
+import { Entity, IEntity } from "../entities/Entity";
 export interface IUser extends IEntity {
     email: string;
     given_name: string;

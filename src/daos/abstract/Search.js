@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Search = void 0;
 const Semaphore_1 = require("../../engines/Semaphore");
 const functions_1 = require("../../utils/functions");
-const PrefixedErrors_1 = require("../../entities/net/error/PrefixedErrors");
+const PrefixedErrors_1 = require("../../server/net/error/PrefixedErrors");
 class Search {
     map = {};
     items = {};
