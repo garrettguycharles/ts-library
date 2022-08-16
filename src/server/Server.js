@@ -92,7 +92,7 @@ class Server {
         return this;
     }
     start(port = process.env.PORT || 3000) {
-        this.app.listen(port, () => {
+        return this.app.listen(port, () => {
             new Logger_1.Logger().log("Server Start", `Listening on port ${port}`);
         });
     }
