@@ -2,14 +2,17 @@
 import express, { Express, Request, Response, Router } from "express";
 import 'express-async-errors';
 import { IRequest, IResponse } from "./net/actions/abstract/HttpRequestResponse";
+import * as http from "http";
 export declare class Server {
     app: Express;
+    runningInstance?: http.Server;
     router: Router;
     constructor();
     use(path: string, router: express.Router): void;
     get(path: string, handler: (req: Request, res: Response) => Promise<any>): this;
     post(path: string, handler: (req: Request, res: Response) => Promise<any>): this;
-    start(port?: string | number): import("http").Server;
+    start(port?: string | number): void;
+    stop(): void;
 }
 export interface IRequestHandler<RequestType extends IRequest, ResponseType extends IResponse> {
     handle(request: RequestType): ResponseType;

@@ -37,6 +37,7 @@ const Logger_1 = require("../logging/Logger");
 const PrefixedError_1 = require("./net/error/abstract/PrefixedError");
 class Server {
     app;
+    runningInstance;
     router;
     constructor() {
         this.app = (0, express_1.default)();
@@ -92,9 +93,17 @@ class Server {
         return this;
     }
     start(port = process.env.PORT || 3000) {
-        return this.app.listen(port, () => {
-            new Logger_1.Logger().log("Server Start", `Listening on port ${port}`);
-        });
+        if (!this.runningInstance) {
+            this.runningInstance = this.app.listen(port, () => {
+                new Logger_1.Logger().log("Server Start", `Listening on port ${port}`);
+            });
+        }
+    }
+    stop() {
+        if (this.runningInstance) {
+            this.runningInstance.close();
+            this.runningInstance = undefined;
+        }
     }
 }
 exports.Server = Server;

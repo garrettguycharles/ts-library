@@ -8,9 +8,11 @@ import {Logger} from "../logging/Logger";
 import {isPrefixedError, PrefixedError} from "./net/error/abstract/PrefixedError";
 import {AbstractRequest, IRequest, IResponse} from "./net/actions/abstract/HttpRequestResponse";
 import {PayloadResponse} from "./net/actions/abstract/AbstractReqResTypes";
+import * as http from "http";
 
 export class Server {
     app: Express;
+    runningInstance?: http.Server;
     router: Router;
 
     constructor() {
@@ -87,10 +89,19 @@ export class Server {
         return this;
     }
 
-    start(port = process.env.PORT || 3000) {
-        return this.app.listen(port, () => {
-            new Logger().log("Server Start", `Listening on port ${port}`);
-        });
+    start(port = process.env.PORT || 3000): void {
+        if (!this.runningInstance) {
+            this.runningInstance = this.app.listen(port, () => {
+                new Logger().log("Server Start", `Listening on port ${port}`);
+            });
+        }
+    }
+
+    stop(): void {
+        if (this.runningInstance) {
+            this.runningInstance.close();
+            this.runningInstance = undefined;
+        }
     }
 }
 
