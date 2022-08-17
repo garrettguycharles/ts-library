@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TAGS = exports.SecureUser = exports.User = void 0;
+exports.SecureUser = exports.User = void 0;
 const Entity_1 = require("../entities/Entity");
 class User extends Entity_1.Entity {
     email = "";
@@ -44,7 +44,4 @@ class SecureUser extends User {
     }
 }
 exports.SecureUser = SecureUser;
-exports.TAGS = {
-    VENDOR: "VENDOR"
-};
 //# sourceMappingURL=User.js.map

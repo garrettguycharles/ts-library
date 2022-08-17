@@ -26,7 +26,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.quickHandleRequest = exports.Server = void 0;
+exports.Server = void 0;
 const express_1 = __importStar(require("express"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const morgan_1 = __importDefault(require("morgan"));
@@ -34,12 +34,14 @@ const helmet_1 = __importDefault(require("helmet"));
 require("express-async-errors");
 const SecurityUtils_1 = require("../utils/SecurityUtils");
 const Logger_1 = require("../logging/Logger");
-const PrefixedError_1 = require("./net/error/abstract/PrefixedError");
+const PrefixedError_1 = require("./error/abstract/PrefixedError");
 class Server {
     app;
     runningInstance;
     router;
-    constructor() {
+    baseRouterPath;
+    constructor(baseRouterPath = "/") {
+        this.baseRouterPath = baseRouterPath;
         this.app = (0, express_1.default)();
         this.router = (0, express_1.Router)();
         this.app.all('*', function (req, res, next) {
@@ -70,7 +72,7 @@ class Server {
             }
             next();
         });
-        this.app.use('/', this.router);
+        this.app.use(this.baseRouterPath, this.router);
         this.app.use((err, req, res, next) => {
             new Logger_1.Logger().error(err);
             if (err instanceof PrefixedError_1.PrefixedError) {
@@ -92,6 +94,14 @@ class Server {
         this.router.post(path, handler);
         return this;
     }
+    put(path, handler) {
+        this.router.put(path, handler);
+        return this;
+    }
+    delete(path, handler) {
+        this.router.delete(path, handler);
+        return this;
+    }
     start(port = process.env.PORT || 3000) {
         if (!this.runningInstance) {
             this.runningInstance = this.app.listen(port, () => {
@@ -105,12 +115,28 @@ class Server {
             this.runningInstance = undefined;
         }
     }
+    async quickHandle(req, res, handler) {
+        const request = await handler.constructRequest(req.body, req.params);
+        const response = await handler.handle(request);
+        const cookieOptions = {
+            secure: process.env.NODE_ENV !== "development",
+            path: this.baseRouterPath,
+            httpOnly: true,
+            expires: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000)
+        };
+        for (const [key, value] of Object.entries(response.cookies)) {
+            res.cookie(key, value, cookieOptions);
+        }
+        for (const key of response.cookiesToDelete) {
+            res.clearCookie(key);
+        }
+        if (response.body) {
+            return res.status(200).send(response.body);
+        }
+        else {
+            return res.sendStatus(200);
+        }
+    }
 }
 exports.Server = Server;
-const quickHandleRequest = async function (req, res, handler) {
-    const request = handler.constructRequest(req.body, req.params);
-    const response = handler.handle(request);
-    return res.status(200).send(response);
-};
-exports.quickHandleRequest = quickHandleRequest;
 //# sourceMappingURL=Server.js.map

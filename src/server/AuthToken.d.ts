@@ -1,10 +1,6 @@
-import { Entity, IEntity } from "../entities/Entity";
-export interface IAuthToken extends IEntity {
+import { Entity } from "../entities/Entity";
+export declare class AuthToken extends Entity {
     id: string;
-    timestamp: number;
-    user_id: string;
-}
-export declare class AuthToken extends Entity<IAuthToken> implements IAuthToken {
     timestamp: number;
     user_id: string;
     withTimestamp(timestamp: number): AuthToken;

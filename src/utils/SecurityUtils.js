@@ -40,7 +40,12 @@ class SecurityUtils {
         }));
     }
     static readSessionId(sid) {
-        return JSON.parse(this.decodeString64(sid));
+        try {
+            return JSON.parse(this.decodeString64(sid));
+        }
+        catch (e) {
+            return { user_id: "", authtoken: "" };
+        }
     }
 }
 exports.SecurityUtils = SecurityUtils;

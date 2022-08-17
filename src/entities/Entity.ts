@@ -1,20 +1,15 @@
 import {v4} from "uuid";
 
-export interface IEntity {
-    id: string;
-    tags: string[];
-}
-
-export class Entity<T extends IEntity> implements IEntity {
+export class Entity {
     id = v4();
     tags: string[] = [];
 
-    withId<C extends Entity<T>>(this: C, id: string): C {
+    withId(id: string): this {
         this.id = id;
         return this;
     }
 
-    withTags<C extends Entity<T>>(this: C, tags: string[]): C {
+    withTags(tags: string[]): this {
         this.tags = tags;
         return this;
     }
@@ -48,8 +43,8 @@ export class Entity<T extends IEntity> implements IEntity {
         return ":=:";
     }
 
-    from<C extends Entity<T>>(this: C, other: T): C {
-        const validKeys = this.getInterfaceKeys();
+    from(other: any): this {
+        const validKeys = Entity.getInterfaceKeys(this);
 
         // copy valid values
         for (const key of validKeys) {
@@ -87,40 +82,12 @@ export class Entity<T extends IEntity> implements IEntity {
         return this;
     }
 
-    private getInterfaceKeys<C extends Entity<T>>(this: C): string[] {
-        // get blank implementation
+    static getInterfaceKeys(entity: Entity): string[] {
         // @ts-ignore
-        const blankImpl = new this.constructor();
+        const blankImpl = new entity.constructor();
 
         return Object.keys(blankImpl).filter(k => {
             return typeof blankImpl[k] !== "function";
         });
-    }
-}
-
-export interface ISearchableEntity extends IEntity {
-    searchable: string[];
-}
-
-export class SearchableEntity<T extends ISearchableEntity> extends Entity<T> implements ISearchableEntity {
-    searchable: string[] = [];
-
-    withSearchable<C extends SearchableEntity<T>>(this: C, searchable: string[]): C {
-        this.searchable = searchable;
-        return this;
-    }
-
-    protected buildSearchable<C extends SearchableEntity<T>>(this: C): string[] {
-        // @ts-ignore
-        const validKeys = this.getInterfaceKeys().filter(k => typeof this[k] === "string");
-
-        // @ts-ignore
-        return validKeys.map(k => this[k].toLowerCase().replace(/\s/g, "")).filter(s => s.length && s.length < 128);
-    }
-
-    populateSearchable<C extends SearchableEntity<T>>(this: C): C {
-        this.searchable = this.buildSearchable();
-
-        return this;
     }
 }

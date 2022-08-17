@@ -1,11 +1,13 @@
-import {IEntity, ISearchableEntity} from "../../entities/Entity";
-import {IDao, ISearchableDao, ResponseOptions, SearchQuery, SearchQueryOutcome} from "./Dao";
+import {Dao, ResponseOptions, SearchQuery, SearchQueryOutcome} from "./Dao";
 import {Search} from "./Search";
-import {BadRequestError} from "../../server/net/error/PrefixedErrors";
+import {BadRequestError} from "../../server/error/PrefixedErrors";
+import {Entity} from "../../entities/Entity";
 
-export class MockDBDao<T extends IEntity> implements IDao<T> {
+export class MockDao<T extends Entity> implements Dao<T> {
 
     db: T[];
+
+    search = new Search<T>();
 
     constructor(db: T[] = []) {
         this.db = db;
@@ -40,7 +42,7 @@ export class MockDBDao<T extends IEntity> implements IDao<T> {
         return this.db.find(i => i.id === id);
     }
 
-    insert(item: T): Promise<T | undefined> | T | undefined {
+    async insert(item: T): Promise<T | undefined> {
         const found = this.db.find(i => i.id === item.id);
         if (found) {
             throw new BadRequestError("Can't insert item: item with that ID already exists.");
@@ -48,26 +50,21 @@ export class MockDBDao<T extends IEntity> implements IDao<T> {
 
         this.db.push(item);
 
+        await this.search.ingest(item);
+
         return item;
     }
 
-    update(item: T): Promise<T | undefined> | T | undefined {
+    async update(item: T): Promise<T | undefined> {
         const found = this.db.find(i => i.id === item.id);
 
         if (!found) {
             throw new BadRequestError("Can't update item: item with that ID does not exist.");
         }
 
+        await this.search.ingest(item);
+
         return Object.assign(found, item);
-    }
-}
-
-export class MockDBSearchableDao<T extends ISearchableEntity> extends MockDBDao<T> implements ISearchableDao<T> {
-    search: Search<T>;
-
-    constructor(db: T[], search: Search<T>) {
-        super(db);
-        this.search = search;
     }
 
     async findBySearch(queries: SearchQuery[]): Promise<SearchQueryOutcome<T>[]> {
@@ -77,22 +74,6 @@ export class MockDBSearchableDao<T extends ISearchableEntity> extends MockDBDao<
 
             toReturn.push(new SearchQueryOutcome<T>().withQuery(query).withPayload(outcome));
         }
-
-        return toReturn;
-    }
-
-    async insert(item: T): Promise<T | undefined> {
-        const toReturn = await super.insert(item);
-
-        await this.search.ingest(item);
-
-        return toReturn;
-    }
-
-    async update(item: T): Promise<T | undefined> {
-        const toReturn = super.update(item);
-
-        await this.search.ingest(item);
 
         return toReturn;
     }

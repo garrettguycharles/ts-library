@@ -1,10 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MockDBSearchableDao = exports.MockDBDao = void 0;
+exports.MockDao = void 0;
 const Dao_1 = require("./Dao");
-const PrefixedErrors_1 = require("../../server/net/error/PrefixedErrors");
-class MockDBDao {
+const Search_1 = require("./Search");
+const PrefixedErrors_1 = require("../../server/error/PrefixedErrors");
+class MockDao {
     db;
+    search = new Search_1.Search();
     constructor(db = []) {
         this.db = db;
     }
@@ -29,28 +31,22 @@ class MockDBDao {
     findOneById(id) {
         return this.db.find(i => i.id === id);
     }
-    insert(item) {
+    async insert(item) {
         const found = this.db.find(i => i.id === item.id);
         if (found) {
             throw new PrefixedErrors_1.BadRequestError("Can't insert item: item with that ID already exists.");
         }
         this.db.push(item);
+        await this.search.ingest(item);
         return item;
     }
-    update(item) {
+    async update(item) {
         const found = this.db.find(i => i.id === item.id);
         if (!found) {
             throw new PrefixedErrors_1.BadRequestError("Can't update item: item with that ID does not exist.");
         }
+        await this.search.ingest(item);
         return Object.assign(found, item);
-    }
-}
-exports.MockDBDao = MockDBDao;
-class MockDBSearchableDao extends MockDBDao {
-    search;
-    constructor(db, search) {
-        super(db);
-        this.search = search;
     }
     async findBySearch(queries) {
         const toReturn = [];
@@ -60,16 +56,6 @@ class MockDBSearchableDao extends MockDBDao {
         }
         return toReturn;
     }
-    async insert(item) {
-        const toReturn = await super.insert(item);
-        await this.search.ingest(item);
-        return toReturn;
-    }
-    async update(item) {
-        const toReturn = super.update(item);
-        await this.search.ingest(item);
-        return toReturn;
-    }
 }
-exports.MockDBSearchableDao = MockDBSearchableDao;
+exports.MockDao = MockDao;
 //# sourceMappingURL=MockDB.js.map

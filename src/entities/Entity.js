@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SearchableEntity = exports.Entity = void 0;
+exports.Entity = void 0;
 const uuid_1 = require("uuid");
 class Entity {
     id = (0, uuid_1.v4)();
@@ -35,7 +35,7 @@ class Entity {
         return ":=:";
     }
     from(other) {
-        const validKeys = this.getInterfaceKeys();
+        const validKeys = Entity.getInterfaceKeys(this);
         for (const key of validKeys) {
             const otherVal = other[key];
             if (otherVal) {
@@ -62,28 +62,12 @@ class Entity {
         }
         return this;
     }
-    getInterfaceKeys() {
-        const blankImpl = new this.constructor();
+    static getInterfaceKeys(entity) {
+        const blankImpl = new entity.constructor();
         return Object.keys(blankImpl).filter(k => {
             return typeof blankImpl[k] !== "function";
         });
     }
 }
 exports.Entity = Entity;
-class SearchableEntity extends Entity {
-    searchable = [];
-    withSearchable(searchable) {
-        this.searchable = searchable;
-        return this;
-    }
-    buildSearchable() {
-        const validKeys = this.getInterfaceKeys().filter(k => typeof this[k] === "string");
-        return validKeys.map(k => this[k].toLowerCase().replace(/\s/g, "")).filter(s => s.length && s.length < 128);
-    }
-    populateSearchable() {
-        this.searchable = this.buildSearchable();
-        return this;
-    }
-}
-exports.SearchableEntity = SearchableEntity;
 //# sourceMappingURL=Entity.js.map

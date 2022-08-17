@@ -1,17 +1,17 @@
-import {ISearchableEntity} from "../../entities/Entity";
 import {SearchQuery} from "./Dao";
 import {Semaphore} from "../../engines/Semaphore";
 import {getAllStringBearingHashPaths, getValueAtHashPath} from "../../utils/functions";
-import {InternalServerError} from "../../server/net/error/PrefixedErrors";
+import {InternalServerError} from "../../server/error/PrefixedErrors";
+import {Entity} from "../../entities/Entity";
 
-export interface ISearch<T extends ISearchableEntity> {
+export interface ISearch<T extends Entity> {
     ingest(item: T): void | Promise<void>;
     search(query: SearchQuery): T[] | Promise<T[]>;
 }
 
 // TODO: add "Remove" functionality to delete a search index.
 
-export class Search<T extends ISearchableEntity> implements ISearch<T> {
+export class Search<T extends Entity> implements ISearch<T> {
 
     map: {[path: string]: Set<number>} = {};
     items: {[number: number]: T} = {};
@@ -37,8 +37,7 @@ export class Search<T extends ISearchableEntity> implements ISearch<T> {
             next_num = await this.getNextItemNumber();
         }
 
-
-        let searchables = item.searchable;
+        let searchables = this.getSearchablesFromObject(item);
 
         this.items[next_num] = item;
         this.item_ids.add(item.id);
@@ -87,34 +86,12 @@ export class Search<T extends ISearchableEntity> implements ISearch<T> {
             this.map[key].add(item_number);
         }
     }
+
+    private getSearchablesFromObject(entity: any): string[] {
+        const validKeys = Object.keys(entity).filter(k => typeof entity[k] === "string");
+
+        return validKeys.map(k => entity[k].toLowerCase().replace(/\s/g, "")).filter(s => s.length && s.length < 128);
+    }
 }
 
-// const garrett = new User().withGivenName("Garrett").withFamilyName("Charles");
-// const emma = new User().withGivenName("Emma").withFamilyName("Charles");
-//
-// const search = new Search<User>();
-//
-// async function test() {
-//     let start = Date.now();
-//     for (let i = 0; i < 10; i++) {
-//         await search.ingest(garrett);
-//         garrett.family_name += "again";
-//     }
-//
-//     garrett.family_name = "";
-//     search.ingest(garrett);
-//     await search.ingest(emma);
-//     let end = Date.now();
-//     console.log(search.item_counter, `${end - start}ms`);
-//
-//     const queries = [
-//         new SearchQuery().withHashPath("given_name").withQuery("ga"),
-//         new SearchQuery().withHashPath("family_name").withQuery("le")
-//     ];
-//
-//     for (const q of queries) {
-//         console.log(await search.search(q));
-//     }
-// }
-//
-// test();
+

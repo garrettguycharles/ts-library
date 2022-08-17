@@ -1,21 +1,24 @@
-import express, {Express, NextFunction, Request, RequestHandler, Response, Router} from "express";
+import express, {Express, NextFunction, Request, Response, Router} from "express";
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 import helmet from 'helmet';
 import 'express-async-errors';
 import {SecurityUtils} from "../utils/SecurityUtils";
 import {Logger} from "../logging/Logger";
-import {isPrefixedError, PrefixedError} from "./net/error/abstract/PrefixedError";
-import {AbstractRequest, IRequest, IResponse} from "./net/actions/abstract/HttpRequestResponse";
-import {PayloadResponse} from "./net/actions/abstract/AbstractReqResTypes";
+import {PrefixedError} from "./error/abstract/PrefixedError";
+import {HttpRequest, HttpResponse} from "./request-response/HttpRequestResponse";
 import * as http from "http";
+import {HttpRequestHandler} from "./handler/HttpRequestHandler";
 
 export class Server {
     app: Express;
     runningInstance?: http.Server;
     router: Router;
+    baseRouterPath: string;
 
-    constructor() {
+    constructor(baseRouterPath = "/") {
+        this.baseRouterPath = baseRouterPath;
+
         this.app = express();
         this.router = Router();
 
@@ -59,7 +62,7 @@ export class Server {
         });
 
         // add routes
-        this.app.use('/', this.router);
+        this.app.use(this.baseRouterPath, this.router);
 
         // catch/print errors
         this.app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
@@ -89,6 +92,16 @@ export class Server {
         return this;
     }
 
+    put(path: string, handler: (req: Request, res: Response) => Promise<any>): this {
+        this.router.put(path, handler);
+        return this;
+    }
+
+    delete(path: string, handler: (req: Request, res: Response) => Promise<any>): this {
+        this.router.delete(path, handler);
+        return this;
+    }
+
     start(port = process.env.PORT || 3000): void {
         if (!this.runningInstance) {
             this.runningInstance = this.app.listen(port, () => {
@@ -103,21 +116,33 @@ export class Server {
             this.runningInstance = undefined;
         }
     }
+
+    async quickHandle<R extends HttpRequest, S extends HttpResponse<any>>(
+        req: Request, res: Response,
+        handler: HttpRequestHandler<R, S>
+    ): Promise<any> {
+        const request = await handler.constructRequest(req.body, req.params);
+        const response = await handler.handle(request);
+
+        const cookieOptions = {
+            secure: process.env.NODE_ENV !== "development",
+            path: this.baseRouterPath,
+            httpOnly: true,
+            expires: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000)
+        };
+
+        for (const [key, value] of Object.entries(response.cookies)) {
+            res.cookie(key, value, cookieOptions);
+        }
+
+        for (const key of response.cookiesToDelete) {
+            res.clearCookie(key);
+        }
+
+        if (response.body) {
+            return res.status(200).send(response.body);
+        } else {
+            return res.sendStatus(200);
+        }
+    }
 }
-
-export interface IRequestHandler<RequestType extends IRequest, ResponseType extends IResponse> {
-    handle(request: RequestType): ResponseType;
-    constructRequest(body: any, params: {[key: string]: string}): RequestType;
-}
-
-export const quickHandleRequest = async function (
-    req: Request, res: Response,
-    handler: IRequestHandler<any, any>
-): Promise<any> {
-    // @ts-ignore
-    const request = handler.constructRequest(req.body, req.params);
-    const response = handler.handle(request);
-
-    return res.status(200).send(response);
-}
-

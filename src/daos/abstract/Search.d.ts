@@ -1,11 +1,11 @@
-import { ISearchableEntity } from "../../entities/Entity";
 import { SearchQuery } from "./Dao";
 import { Semaphore } from "../../engines/Semaphore";
-export interface ISearch<T extends ISearchableEntity> {
+import { Entity } from "../../entities/Entity";
+export interface ISearch<T extends Entity> {
     ingest(item: T): void | Promise<void>;
     search(query: SearchQuery): T[] | Promise<T[]>;
 }
-export declare class Search<T extends ISearchableEntity> implements ISearch<T> {
+export declare class Search<T extends Entity> implements ISearch<T> {
     map: {
         [path: string]: Set<number>;
     };
@@ -19,5 +19,6 @@ export declare class Search<T extends ISearchableEntity> implements ISearch<T> {
     getNextItemNumber(): Promise<number>;
     search(query: SearchQuery): Promise<T[]>;
     private insertItemAlongHashPath;
+    private getSearchablesFromObject;
 }
 //# sourceMappingURL=Search.d.ts.map

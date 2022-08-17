@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Search = void 0;
 const Semaphore_1 = require("../../engines/Semaphore");
 const functions_1 = require("../../utils/functions");
-const PrefixedErrors_1 = require("../../server/net/error/PrefixedErrors");
+const PrefixedErrors_1 = require("../../server/error/PrefixedErrors");
 class Search {
     map = {};
     items = {};
@@ -25,7 +25,7 @@ class Search {
         else {
             next_num = await this.getNextItemNumber();
         }
-        let searchables = item.searchable;
+        let searchables = this.getSearchablesFromObject(item);
         this.items[next_num] = item;
         this.item_ids.add(item.id);
         for (const searchable of searchables) {
@@ -63,6 +63,10 @@ class Search {
             }
             this.map[key].add(item_number);
         }
+    }
+    getSearchablesFromObject(entity) {
+        const validKeys = Object.keys(entity).filter(k => typeof entity[k] === "string");
+        return validKeys.map(k => entity[k].toLowerCase().replace(/\s/g, "")).filter(s => s.length && s.length < 128);
     }
 }
 exports.Search = Search;

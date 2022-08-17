@@ -44,8 +44,12 @@ export class SecurityUtils {
     }
 
     static readSessionId(sid: string): {user_id: string, authtoken: string} {
-        return JSON.parse(
-            this.decodeString64(sid)
-        ) as {user_id: string, authtoken: string};
+        try {
+            return JSON.parse(
+                this.decodeString64(sid)
+            ) as {user_id: string, authtoken: string};
+        } catch (e) {
+            return {user_id: "", authtoken: ""};
+        }
     }
 }

@@ -23,10 +23,11 @@ export * from './src/services/RsaService';
 export * from './src/server/Server';
 export * from './src/server/AuthToken';
 export * from './src/server/User';
-export * from './src/server/net/actions/abstract/AbstractReqResTypes';
-export * from './src/server/net/actions/abstract/HttpRequestResponse';
-export * from './src/server/net/error/abstract/PrefixedError';
-export * from './src/server/net/error/PrefixedErrors';
+export * from './src/server/quickstart/ServerQuickstart';
+export * from './src/server/request-response/HttpRequestResponse';
+export * from './src/server/request-response/QueryOptions';
+export * from './src/server/error/abstract/PrefixedError';
+export * from './src/server/error/PrefixedErrors';
 
 // structures
 export * from './src/structures/LinkedList';
@@ -43,4 +44,5 @@ export * from './src/utils/functions';
 export * from './src/utils/PathUtils';
 export * from './src/utils/SecurityUtils';
 export * from './src/utils/XmlTools';
+export {HttpRequestHandler} from "./src/server/handler/HttpRequestHandler";
 

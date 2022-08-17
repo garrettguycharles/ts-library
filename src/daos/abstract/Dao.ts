@@ -1,4 +1,4 @@
-import {IEntity, ISearchableEntity} from "../../entities/Entity";
+import {Entity} from "../../entities/Entity";
 
 export class ResponseOptions {
     reverse = false;
@@ -45,7 +45,7 @@ export class SearchQuery {
     }
 }
 
-export class SearchQueryOutcome<T extends IEntity> {
+export class SearchQueryOutcome<T extends Entity> {
     query!: SearchQuery;
     payload: T[] = [];
 
@@ -60,7 +60,7 @@ export class SearchQueryOutcome<T extends IEntity> {
     }
 }
 
-export interface IDao<T extends IEntity> {
+export interface Dao<T extends Entity> {
     findOneById(id: string): Promise<T | undefined> | T | undefined;
     findMany(options: ResponseOptions): Promise<T[]> | T[];
 
@@ -69,8 +69,6 @@ export interface IDao<T extends IEntity> {
     delete(id: string): Promise<T | undefined> | T | undefined;
 
     update(item: T): Promise<T | undefined> | T | undefined;
-}
 
-export interface ISearchableDao<T extends ISearchableEntity> extends IDao<T> {
     findBySearch(queries: SearchQuery[]): Promise<SearchQueryOutcome<T>[]> | SearchQueryOutcome<T>[];
 }
