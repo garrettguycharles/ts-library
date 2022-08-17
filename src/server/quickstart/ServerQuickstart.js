@@ -58,7 +58,7 @@ class LoginHandler {
             throw new PrefixedErrors_1.BadRequestError("Email or password is incorrect.");
         }
         const user = new User_1.SecureUser().from(foundUser[0].payload[0]);
-        const isCorrectPassword = SecurityUtils_1.SecurityUtils.verifyHash(request.password, user.salt, user.hash);
+        const isCorrectPassword = await SecurityUtils_1.SecurityUtils.verifyHash(request.password, user.salt, user.hash);
         if (!isCorrectPassword) {
             throw new PrefixedErrors_1.BadRequestError("Email or password is incorrect.");
         }

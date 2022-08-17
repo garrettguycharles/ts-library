@@ -72,7 +72,7 @@ class LoginHandler implements HttpRequestHandler<LoginRequest, HttpResponse<unde
 
         const user = new SecureUser().from(foundUser[0].payload[0]);
 
-        const isCorrectPassword = SecurityUtils.verifyHash(request.password, user.salt, user.hash);
+        const isCorrectPassword = await SecurityUtils.verifyHash(request.password, user.salt, user.hash);
 
         if (!isCorrectPassword) {
             throw new BadRequestError("Email or password is incorrect.");
