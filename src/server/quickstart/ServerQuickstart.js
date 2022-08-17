@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.QuickstartServer = void 0;
+exports.QuickstartServer = exports.LoginRequest = exports.RegisterRequest = void 0;
 const HttpRequestResponse_1 = require("../request-response/HttpRequestResponse");
 const Dao_1 = require("../../daos/abstract/Dao");
 const User_1 = require("../User");
@@ -15,6 +15,7 @@ class RegisterRequest extends HttpRequestResponse_1.HttpRequest {
     given_name = "";
     family_name = "";
 }
+exports.RegisterRequest = RegisterRequest;
 class RegisterHandler {
     constructRequest(body, params) {
         return new RegisterRequest().from(body).from(params);
@@ -44,6 +45,7 @@ class LoginRequest extends HttpRequestResponse_1.HttpRequest {
     email = "";
     password = "";
 }
+exports.LoginRequest = LoginRequest;
 class LoginHandler {
     async constructRequest(body, params) {
         return new LoginRequest().from(body).from(params);

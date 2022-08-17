@@ -8,7 +8,7 @@ import {AuthToken} from "../AuthToken";
 import {BadRequestError, UnauthenticatedError} from "../error/PrefixedErrors";
 import {DaoProvider} from "../../daos/DaoProvider";
 
-class RegisterRequest extends HttpRequest {
+export class RegisterRequest extends HttpRequest {
     email: string = "";
     password: string = "";
     given_name: string = "";
@@ -49,7 +49,7 @@ class RegisterHandler implements HttpRequestHandler<RegisterRequest, HttpRespons
     }
 }
 
-class LoginRequest extends HttpRequest {
+export class LoginRequest extends HttpRequest {
     email: string = "";
     password: string = "";
 }
