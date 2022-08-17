@@ -1,14 +1,16 @@
-export declare class HttpRequest {
+export declare class HttpRequest<PayloadType = undefined> {
     authtoken: string;
     user_id: string;
+    payload: PayloadType;
+    withPayload(payload: PayloadType): this;
     from<T extends HttpRequest>(this: T, other: any): T;
 }
-export declare class HttpResponse<BodyType> {
+export declare class HttpResponse<BodyType = undefined> {
     cookies: {
         [key: string]: string;
     };
     cookiesToDelete: Set<string>;
-    body?: BodyType;
+    body: BodyType;
     withBody(body: BodyType): this;
     withCookie(key: string, value: string): this;
     deleteCookie(key: string): this;

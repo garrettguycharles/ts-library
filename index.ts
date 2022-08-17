@@ -1,6 +1,11 @@
 
 // expose all classes
 
+// daos
+export * from './src/daos/DaoProvider';
+export * from './src/daos/abstract/Dao';
+export * from './src/daos/abstract/MockDB';
+
 // entities TODO
 
 // engines
@@ -25,7 +30,6 @@ export * from './src/server/AuthToken';
 export * from './src/server/User';
 export * from './src/server/quickstart/ServerQuickstart';
 export * from './src/server/request-response/HttpRequestResponse';
-export * from './src/server/request-response/QueryOptions';
 export * from './src/server/error/abstract/PrefixedError';
 export * from './src/server/error/PrefixedErrors';
 

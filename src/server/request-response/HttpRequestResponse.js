@@ -4,6 +4,11 @@ exports.HttpResponse = exports.HttpRequest = void 0;
 class HttpRequest {
     authtoken = "";
     user_id = "";
+    payload;
+    withPayload(payload) {
+        this.payload = payload;
+        return this;
+    }
     from(other) {
         const defaultImplementation = new this.constructor();
         const validKeys = Array.from(Object.keys(defaultImplementation));

@@ -1,6 +1,12 @@
-export class HttpRequest {
+export class HttpRequest<PayloadType=undefined> {
     authtoken = "";
     user_id = "";
+    payload!: PayloadType;
+
+    withPayload(payload: PayloadType): this {
+        this.payload = payload;
+        return this;
+    }
 
     from<T extends HttpRequest>(this: T, other: any): T {
         // @ts-ignore
@@ -27,10 +33,10 @@ export class HttpRequest {
     }
 }
 
-export class HttpResponse<BodyType> {
+export class HttpResponse<BodyType = undefined> {
     cookies: {[key: string]: string} = {};
     cookiesToDelete = new Set<string>();
-    body?: BodyType;
+    body!: BodyType;
 
     withBody(body: BodyType): this {
         this.body = body;

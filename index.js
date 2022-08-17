@@ -14,6 +14,9 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+__exportStar(require("./src/daos/DaoProvider"), exports);
+__exportStar(require("./src/daos/abstract/Dao"), exports);
+__exportStar(require("./src/daos/abstract/MockDB"), exports);
 __exportStar(require("./src/engines/Tickable"), exports);
 __exportStar(require("./src/engines/Semaphore"), exports);
 __exportStar(require("./src/io/Input"), exports);
@@ -27,7 +30,6 @@ __exportStar(require("./src/server/AuthToken"), exports);
 __exportStar(require("./src/server/User"), exports);
 __exportStar(require("./src/server/quickstart/ServerQuickstart"), exports);
 __exportStar(require("./src/server/request-response/HttpRequestResponse"), exports);
-__exportStar(require("./src/server/request-response/QueryOptions"), exports);
 __exportStar(require("./src/server/error/abstract/PrefixedError"), exports);
 __exportStar(require("./src/server/error/PrefixedErrors"), exports);
 __exportStar(require("./src/structures/LinkedList"), exports);

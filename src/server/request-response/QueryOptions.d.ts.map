@@ -1,1 +1,0 @@
-{"version":3,"file":"QueryOptions.d.ts","sourceRoot":"","sources":["QueryOptions.ts"],"names":[],"mappings":"AAAA,qBAAa,gBAAgB;IACzB,OAAO,UAAS;IAChB,SAAS,EAAE,MAAM,GAAG,SAAS,CAAC;IAC9B,KAAK,EAAE,MAAM,GAAG,SAAS,CAAC;CAC7B;AAED,oBAAY,WAAW,GAAG;IAAE,CAAC,QAAQ,EAAE,MAAM,GAAG,MAAM,CAAA;CAAE,CAAC"}

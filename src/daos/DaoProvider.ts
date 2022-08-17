@@ -4,7 +4,7 @@ import {MockDao} from "./abstract/MockDB";
 import {AuthToken} from "../server/AuthToken";
 
 export class DaoProvider {
-    private static userDao: Dao<SecureUser> = new MockDao<SecureUser>();
+    protected static userDao: Dao<SecureUser> = new MockDao<SecureUser>();
 
     public static getUserDao(): Dao<SecureUser> {
         return this.userDao;
@@ -15,7 +15,7 @@ export class DaoProvider {
 
 
 
-    private static authTokenDao: Dao<AuthToken> = new MockDao<AuthToken>();
+    protected static authTokenDao: Dao<AuthToken> = new MockDao<AuthToken>();
 
     public static getAuthTokenDao(): Dao<AuthToken> {
         return this.authTokenDao;
