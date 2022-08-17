@@ -1,4 +1,4 @@
-export class HttpRequest<PayloadType extends any = undefined> {
+export class HttpRequest<PayloadType=any> {
     authtoken = "";
     user_id = "";
     payload!: PayloadType;
@@ -33,7 +33,7 @@ export class HttpRequest<PayloadType extends any = undefined> {
     }
 }
 
-export class HttpResponse<BodyType extends any = undefined> {
+export class HttpResponse<BodyType=any> {
     cookies: {[key: string]: string} = {};
     cookiesToDelete = new Set<string>();
     body!: BodyType;
