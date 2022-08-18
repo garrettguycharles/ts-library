@@ -41,7 +41,7 @@ class RegisterHandler implements HttpRequestHandler<RegisterRequest, HttpRespons
 
         await DaoProvider.getUserDao().insert(newUser);
 
-        const newAuthToken = new AuthToken().withUserId(newUser.id);
+        const newAuthToken = new AuthToken().withId(SecurityUtils.generateUUID()).withUserId(newUser.id);
 
         await DaoProvider.getAuthTokenDao().insert(newAuthToken);
 
@@ -78,7 +78,7 @@ class LoginHandler implements HttpRequestHandler<LoginRequest, HttpResponse<unde
             throw new BadRequestError("Email or password is incorrect.");
         }
 
-        const newAuthToken = new AuthToken().withUserId(user.id);
+        const newAuthToken = new AuthToken().withId(SecurityUtils.generateUUID()).withUserId(user.id);
 
         await DaoProvider.getAuthTokenDao().insert(newAuthToken);
 

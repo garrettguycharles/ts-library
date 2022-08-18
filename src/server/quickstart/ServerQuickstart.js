@@ -36,7 +36,7 @@ class RegisterHandler {
             .withSalt(SecurityUtils_1.SecurityUtils.generateSalt());
         newUser.withHash(await SecurityUtils_1.SecurityUtils.generateHash(request.password, newUser.salt));
         await DaoProvider_1.DaoProvider.getUserDao().insert(newUser);
-        const newAuthToken = new AuthToken_1.AuthToken().withUserId(newUser.id);
+        const newAuthToken = new AuthToken_1.AuthToken().withId(SecurityUtils_1.SecurityUtils.generateUUID()).withUserId(newUser.id);
         await DaoProvider_1.DaoProvider.getAuthTokenDao().insert(newAuthToken);
         return new HttpRequestResponse_1.HttpResponse().withCookie("sessionid", SecurityUtils_1.SecurityUtils.makeSessionId(newUser.id, newAuthToken.id));
     }
@@ -64,7 +64,7 @@ class LoginHandler {
         if (!isCorrectPassword) {
             throw new PrefixedErrors_1.BadRequestError("Email or password is incorrect.");
         }
-        const newAuthToken = new AuthToken_1.AuthToken().withUserId(user.id);
+        const newAuthToken = new AuthToken_1.AuthToken().withId(SecurityUtils_1.SecurityUtils.generateUUID()).withUserId(user.id);
         await DaoProvider_1.DaoProvider.getAuthTokenDao().insert(newAuthToken);
         return new HttpRequestResponse_1.HttpResponse().withCookie('sessionid', SecurityUtils_1.SecurityUtils.makeSessionId(user.id, newAuthToken.id));
     }
