@@ -1,7 +1,5 @@
-import {v4} from "uuid";
-
 export class Entity {
-    id = v4();
+    id = "";
     tags: string[] = [];
 
     withId(id: string): this {

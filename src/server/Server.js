@@ -116,7 +116,7 @@ class Server {
         }
     }
     async quickHandle(req, res, handler) {
-        const request = await handler.constructRequest(req.body, req.params);
+        const request = await handler.constructRequest(req.body, req.params, req.query);
         const response = await handler.handle(request);
         const cookieOptions = {
             secure: process.env.NODE_ENV !== "development",

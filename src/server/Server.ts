@@ -121,7 +121,7 @@ export class Server {
         req: Request, res: Response,
         handler: HttpRequestHandler<R, S>
     ): Promise<any> {
-        const request = await handler.constructRequest(req.body, req.params);
+        const request = await handler.constructRequest(req.body, req.params, req.query as {[p: string]:string});
         const response = await handler.handle(request);
 
         const cookieOptions = {

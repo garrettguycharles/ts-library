@@ -3,6 +3,8 @@ export interface HttpRequestHandler<RequestType extends HttpRequest, ResponseTyp
     handle(request: RequestType): ResponseType | Promise<ResponseType>;
     constructRequest(body: any, params: {
         [key: string]: string;
+    }, query: {
+        [key: string]: string;
     }): RequestType | Promise<RequestType>;
 }
 //# sourceMappingURL=HttpRequestHandler.d.ts.map
